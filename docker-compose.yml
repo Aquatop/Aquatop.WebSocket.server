@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  websocket-server:
+    container_name: websocket-server
+    build: .
+    command: bash -c "yarn && yarn dev"
+    ports:
+      - '3333:3333'
+    volumes:
+      - .:/usr/app
+    network_mode: host
