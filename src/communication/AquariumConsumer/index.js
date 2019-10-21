@@ -1,9 +1,9 @@
 export default class Communication {
-  constructor(kafka, monitoringSocket) {
+  constructor(kafka, aquariumSocket) {
     this.kafka = kafka;
-    this.monitoringSocket = monitoringSocket;
+    this.aquariumSocket = aquariumSocket;
 
-    this.consumer = this.kafka.consumer({ groupId: 'monitoringSocket-group' });
+    this.consumer = this.kafka.consumer({ groupId: 'aquariumSocket-group' });
 
     this.run();
   }
@@ -11,7 +11,7 @@ export default class Communication {
   async run() {
     await this.consumer.connect();
 
-    await this.consumer.subscribe({ topic: 'monitoring-websocket' });
+    await this.consumer.subscribe({ topic: 'aquarium-websocket' });
 
     await this.consumer.run({
       eachMessage: async ({ message }) => {
@@ -19,8 +19,9 @@ export default class Communication {
         const { type, aquarium } = payload;
 
         switch (type) {
-          case 'REQUEST_REPORT':
-            this.monitoringSocket.emit(type, { aquarium });
+          default:
+          // case 'REQUEST_REPORT':
+          //   this.monitoringSocket.emit(type, { aquarium });
         }
       },
     });

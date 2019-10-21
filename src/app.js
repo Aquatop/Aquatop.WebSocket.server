@@ -2,8 +2,12 @@ import io from 'socket.io';
 import { Kafka, logLevel } from 'kafkajs';
 
 import KafkaProducer from './communication/Producer';
+
 import MonitoringEvents from './events/MonitoringEvents';
 import MonitoringConsumer from './communication/MonitoringConsumer';
+
+import AquariumEvents from './events/AquariumEvents';
+import AquariumConsumer from './communication/AquariumConsumer';
 
 class App {
   constructor() {
@@ -22,6 +26,12 @@ class App {
       this.producer
     ).monitoringSocket;
     new MonitoringConsumer(this.kafka, this.monitoringSocket);
+
+    this.aquariumSocket = new AquariumEvents(
+      this.server,
+      this.producer
+    ).aquariumSocket;
+    new AquariumConsumer(this.kafka, this.aquariumSocket);
   }
 }
 
