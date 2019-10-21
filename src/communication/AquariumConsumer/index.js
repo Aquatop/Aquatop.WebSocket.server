@@ -16,12 +16,12 @@ export default class Communication {
     await this.consumer.run({
       eachMessage: async ({ message }) => {
         const payload = JSON.parse(message.value);
-        const { type, aquarium } = payload;
+        const { type, aquarium, pin } = payload;
 
         switch (type) {
           default:
-          // case 'REQUEST_REPORT':
-          //   this.monitoringSocket.emit(type, { aquarium });
+          case 'DISPLAY_PIN':
+            this.aquariumSocket.emit(type, { aquarium, pin });
         }
       },
     });
