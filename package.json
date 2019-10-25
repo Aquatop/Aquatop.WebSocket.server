@@ -1,0 +1,17 @@
+{
+  "name": "Aquatop.WebSocket.server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Aquatop/Aquatop.WebSocket.server.git",
+  "author": "lukassxp <lpalucas.10@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "kafkajs": "^1.11.0",
+    "nodemon": "^1.19.2",
+    "socket.io": "^2.3.0",
+    "sucrase": "^3.10.1"
+  }
+}
