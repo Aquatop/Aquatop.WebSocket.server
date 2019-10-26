@@ -15,7 +15,7 @@ class App {
 
     this.kafka = new Kafka({
       clientId: 'websocket',
-      brokers: ['localhost:9092'],
+      brokers: [process.env.KAFKA_URL],
       logLevel: logLevel.WARN,
     });
 
