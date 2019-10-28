@@ -21,10 +21,13 @@ export default class Communication {
         switch (type) {
           case 'REQUEST_FEED_FISHES':
             this.schedulingSocket.emit(type, { aquarium });
+            break;
           case 'REQUEST_TURN_ON_LIGHTS':
             this.schedulingSocket.emit(type, { aquarium });
+            break;
           case 'REQUEST_TURN_OFF_LIGHTS':
             this.schedulingSocket.emit(type, { aquarium });
+            break;
         }
       },
     });
