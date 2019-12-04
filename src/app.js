@@ -9,13 +9,16 @@ import MonitoringConsumer from './communication/MonitoringConsumer';
 import AquariumEvents from './events/AquariumEvents';
 import AquariumConsumer from './communication/AquariumConsumer';
 
+import SchedulingEvents from './events/SchedulingEvents';
+import SchedulingConsumer from './communication/SchedulingConsumer';
+
 class App {
   constructor() {
     this.server = io();
 
     this.kafka = new Kafka({
       clientId: 'websocket',
-      brokers: ['localhost:9092'],
+      brokers: [process.env.KAFKA_URL],
       logLevel: logLevel.WARN,
     });
 
@@ -32,6 +35,9 @@ class App {
       this.producer
     ).aquariumSocket;
     new AquariumConsumer(this.kafka, this.aquariumSocket);
+
+    this.schedulingSocket = new SchedulingEvents(this.server).schedulingSocket;
+    new SchedulingConsumer(this.kafka, this.schedulingSocket);
   }
 }
 

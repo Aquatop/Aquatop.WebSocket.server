@@ -19,9 +19,14 @@ export default class Communication {
         const { type, aquarium, pin } = payload;
 
         switch (type) {
-          default:
           case 'DISPLAY_PIN':
             this.aquariumSocket.emit(type, { aquarium, pin });
+          case 'REQUEST_TURN_ON_LIGHTS':
+          case 'REQUEST_TURN_OFF_LIGHTS':
+          case 'REQUEST_FEED_FISHES':
+          case 'REQUEST_SWAP_WATER':
+            this.aquariumSocket.emit(type, { aquarium });
+          default:
         }
       },
     });
